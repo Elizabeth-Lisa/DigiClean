@@ -23,6 +23,7 @@ $response .= "2. Login \n";
 else if ($text == "1*1") {
 $response = "CON You are about to SignUp\n";
 $response .= "Please Enter 1 to confirm \n";
+}
 
 else if ($text == "1*1*1") {
 $response = "CON Enter your full name  \n";
