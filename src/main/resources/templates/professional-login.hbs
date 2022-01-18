@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="/img/favicon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/forms.css">
+    <title>Analyst Login</title>
+</head>
+<body class="body">
+<form method="post" action="/analyst/login">
+    <div id="login">
+        <div class="container pt-5">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="" method="post">
+                            <h3 class="text-center">Login</h3>
+                            <div class="form-group">
+                                <label for="username">Email:</label><br>
+                                <input type="email" name="analystEmail" id="analystEmail" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label><br>
+                                <input type="password" name="analystPassword" id="analystPassword" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="remember-me" class=""><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                                <input type="submit" value="Log in" class="btn btn-info btn-block redd mt-5">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>

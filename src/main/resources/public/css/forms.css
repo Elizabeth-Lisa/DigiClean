@@ -1,0 +1,27 @@
+.centered-form{
+	margin-top: 60px;
+}
+
+.centered-form .panel{
+	background: rgba(255, 255, 255, 0.8);
+	box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+}
+.body{
+    background-color: rgba(52,90,113,0.892)
+}
+.redd{
+    background-color:  #FF0000ff;;
+}
+/* login form */
+#login .container #login-row #login-column #login-box {
+	max-width: 600px;
+	/* height: 320px; */
+	border: 1px solid #9C9C9C;
+	background-color: #EAEAEA;
+  }
+  #login .container #login-row #login-column #login-box #login-form {
+	padding: 20px;
+  }
+  #login .container #login-row #login-column #login-box #login-form #register-link {
+	margin-top: -85px;
+  }

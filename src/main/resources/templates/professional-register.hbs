@@ -1,0 +1,74 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="/img/favicon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/forms.css">
+    <title>Analyst Register</title>
+</head>
+
+<body class="body">
+<div class="container">
+    <form method="post" action="/analyst/register">
+        <div class="row centered-form">
+            <div class="col-md-1"></div>
+            <div class="col-xs-12 col-sm-8 col-md-9 ">
+                <div class="panel panel-default pl-4 pt-3 pr-4 pb-3">
+                    <div class="panel-heading">
+                        <h4 class="card-title mt-3 text-center red">Create Account</h4>
+                        <p class="text-center red">Get started with your free account</p>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" name="analystName" id="analystName" class="form-control input-sm"
+                                       placeholder="Your name">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="email" name="analystEmail" id="analystEmail" class="form-control input-sm"
+                                       placeholder="Email Address">
+                            </div>
+
+                            <select name="trainerId" id="trainerId" class="form-control mb-3">
+                                {{#each trainers}}
+                                    <option value="{{id}}">{{trainerName}}</option>
+                                {{/each}}
+                            </select>
+
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input type="password" name="analystPassword" id="analystPassword"
+                                               class="form-control input-sm" placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input type="password" name="password_confirmation" id="password_confirmation"
+                                               class="form-control input-sm" placeholder="Confirm Password">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="submit" value="Register" class="btn btn-info btn-block redd mt-4">
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </form>
+</div>
+
+</body>
+
+</html>
