@@ -28,20 +28,19 @@
                     <div class="panel-body">
                         <form role="form">
                             <div class="form-group">
-                                <input type="text" name="analystName" id="analystName" class="form-control input-sm"
+                                <input type="text" name="cleanerName" id="cleanerName" class="form-control input-sm"
                                        placeholder="Your name">
                             </div>
 
                             <div class="form-group">
-                                <input type="email" name="analystEmail" id="analystEmail" class="form-control input-sm"
-                                       placeholder="Email Address">
+                                <input type="number" name="cleanerId" id="cleanerId" class="form-control input-sm"
+                                       placeholder="National Id Number">
                             </div>
 
-                            <select name="trainerId" id="trainerId" class="form-control mb-3">
-                                {{#each trainers}}
-                                    <option value="{{id}}">{{trainerName}}</option>
-                                {{/each}}
-                            </select>
+                            <div class="form-group">
+                                <input type="number" name="cleanerPhone" id="cleanerPhone" class="form-control input-sm"
+                                       placeholder="Phone Number">
+                            </div>
 
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6">
