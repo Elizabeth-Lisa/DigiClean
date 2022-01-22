@@ -38,7 +38,7 @@ public class Sql2oCleanerDao implements CleanerDao{
     public void addCleaner(Cleaner cleaner) {
         getDrivers();
 
-        String sql = "INSERT INTO cleaners () VALUES ()";
+        String sql = "INSERT INTO cleaners (cleanerName, cleanerPassword, cleanerIdNo, cleanerPhone) VALUES (:cleanerName, :cleanerPassword, :cleanerIdNo, :cleanerPhone)";
         try(Connection conn = sql2o.open()){
             int id = (int) conn.createQuery(sql,true)
                     .bind(cleaner)
@@ -92,5 +92,17 @@ public class Sql2oCleanerDao implements CleanerDao{
             e.printStackTrace();
         }
 
+    }
+
+    public Cleaner findCleanerByIdAndPassword(int cleanerIdNo, int cleanerPassword) {
+        getDrivers();
+
+        String sql = "SELECT * FROM cleaners WHERE cleanerIdNo = :cleanerIdNo AND cleanerPassword = :cleanerPassword";
+        try(Connection conn = sql2o.open()){
+            return conn.createQuery(sql)
+                    .addParameter("cleanerIdNo",cleanerIdNo)
+                    .addParameter("cleanerPassword",cleanerPassword)
+                    .executeAndFetchFirst(Cleaner.class);
+        }
     }
 }
