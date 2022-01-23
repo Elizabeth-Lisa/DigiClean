@@ -24,8 +24,8 @@ public class App {
         port(getHerokuAssignedPort());
         staticFileLocation("/public");
 
-        String connectionString = "jdbc:postgresql://:5432/digiclean?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory";
-        Sql2o sql2o = new Sql2o(connectionString,"chalie","sparkpass");
+        String connectionString = "jdbc:postgresql://ec2-54-208-139-247.compute-1.amazonaws.com:5432/d30bk4tmsim0ug?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory";
+        Sql2o sql2o = new Sql2o(connectionString,"hthenwgyqmbuvo","d136db0bd4b9991a3e18bcdeb1177aab7f710813542fa9e763493b230ddd1831");
         Sql2oCleanerDao cleanerDao = new Sql2oCleanerDao(sql2o);
 
         get("/",(request, response) -> {
@@ -53,6 +53,17 @@ public class App {
             }
             return null;
         }, new HandlebarsTemplateEngine());
+
+
+        get("/cleaner/dashboard",(request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "cleaner-dashboard.hbs");
+
+        }, new HandlebarsTemplateEngine());
+
+        ///cleaner/profile/update
+        //to do, add profile update logic
+
 
         get("/professional/register",(request, response) -> {
             Map<String, Object> model = new HashMap<>();
