@@ -10,7 +10,7 @@ import java.util.List;
 public class Sql2oClientDao implements ClientDao{
     private final Sql2o sql2o;
 
-    private Sql2oClientDao(Sql2o sql2o){
+    public Sql2oClientDao(Sql2o sql2o){
         this.sql2o = sql2o;
     }
 
@@ -35,7 +35,7 @@ public class Sql2oClientDao implements ClientDao{
     @Override
     public void addClient(Client client) {
         getDrivers();
-        String sql = "INSERT INTO clients () VALUES ()";
+        String sql = "INSERT INTO clients (clientName,clientPassword,clientIdNo, clientPhone,clientLocation) VALUES (:clientName, :clientPassword, :clientIdNo, :clientPhone, :clientLocation)";
         try(Connection conn = sql2o.open()){
             int id = (int) conn.createQuery(sql, true)
                     .bind(client)
