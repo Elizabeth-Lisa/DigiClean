@@ -50,10 +50,23 @@ public class Sql2oClientDao implements ClientDao{
     @Override
     public Client findClientById(int id) {
         getDrivers();
-        String sql = "SELECT * FROM client WHERE id = :id";
+        String sql = "SELECT * FROM clients WHERE id = :id";
         try(Connection conn = sql2o.open()){
             return conn.createQuery(sql)
                     .addParameter("id",id)
+                    .executeAndFetchFirst(Client.class);
+        }
+
+    }
+
+    @Override
+    public Client findClientByIdAndPassword(int clientIdNo, int clientPassword) {
+        getDrivers();
+        String sql = "SELECT * FROM clients WHERE clientIdNo = :clientIdNo AND clientPassword = :clientPassword";
+        try(Connection conn = sql2o.open()){
+            return conn.createQuery(sql)
+                    .addParameter("clientIdNo",clientIdNo)
+                    .addParameter("clientPassword",clientPassword)
                     .executeAndFetchFirst(Client.class);
         }
 

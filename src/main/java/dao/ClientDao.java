@@ -14,7 +14,10 @@ public interface ClientDao {
     //get a specific Client
     Client findClientById(int id);
 
-    //Update a Client
+    Client findClientByIdAndPassword(int clientIdNo, int clientPassword);
+
+
+        //Update a Client
 
 
     //Delete a client
