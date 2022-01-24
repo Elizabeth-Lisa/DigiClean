@@ -7,7 +7,6 @@ CREATE TABLE  clients(
     clientIdNo INT,
     clientPassword INT,
     clientPhone INT,
-    status BOOLEAN,
     clientLocation VARCHAR
 );
 
