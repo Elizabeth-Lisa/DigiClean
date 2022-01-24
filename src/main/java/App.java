@@ -1,5 +1,7 @@
 import dao.Sql2oCleanerDao;
+import dao.Sql2oClientDao;
 import models.Cleaner;
+import models.Client;
 import org.sql2o.Sql2o;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -26,7 +28,9 @@ public class App {
 
         String connectionString = "jdbc:postgresql://ec2-54-208-139-247.compute-1.amazonaws.com:5432/d30bk4tmsim0ug?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory";
         Sql2o sql2o = new Sql2o(connectionString,"hthenwgyqmbuvo","d136db0bd4b9991a3e18bcdeb1177aab7f710813542fa9e763493b230ddd1831");
+
         Sql2oCleanerDao cleanerDao = new Sql2oCleanerDao(sql2o);
+        Sql2oClientDao clientDao = new Sql2oClientDao(sql2o);
 
         get("/",(request, response) -> {
             Map<String, Object> model = new HashMap<>();
@@ -58,7 +62,6 @@ public class App {
         get("/cleaner/dashboard",(request, response) -> {
             Map<String, Object> model = new HashMap<>();
             return new ModelAndView(model, "cleaner-dashboard.hbs");
-
         }, new HandlebarsTemplateEngine());
 
         ///cleaner/profile/update
@@ -68,7 +71,6 @@ public class App {
         get("/professional/register",(request, response) -> {
             Map<String, Object> model = new HashMap<>();
             return new ModelAndView(model, "professional-register.hbs");
-
         }, new HandlebarsTemplateEngine());
 
         //process new professional
@@ -95,13 +97,46 @@ public class App {
         get("/client/login",(request, response) -> {
             Map<String, Object> model = new HashMap<>();
             return new ModelAndView(model, "client-login.hbs");
+        }, new HandlebarsTemplateEngine());
 
+        //process client login form
+        post("/client/login", (request,response)->{
+            Map<String,Object>model = new HashMap<>();
+            int clientIdNo = Integer.parseInt(request.queryParams("clientIdNo"));
+            int clientPassword = Integer.parseInt(request.queryParams("clientPassword"));
+            Client exist = clientDao.findClientByIdAndPassword(clientIdNo,clientPassword);
+            if (exist.getClientIdNo() == clientIdNo && exist.getClientPassword() == clientPassword){
+                response.redirect("/client/dashboard");
+            }else{
+                response.redirect("/client/login");
+            }
+            return null;
         }, new HandlebarsTemplateEngine());
 
         get("/client/register",(request, response) -> {
             Map<String, Object> model = new HashMap<>();
             return new ModelAndView(model, "client-register.hbs");
+        }, new HandlebarsTemplateEngine());
 
+        //process new client
+        post("/client/register",(request,response)->{
+            Map<String,Object>model = new HashMap<>();
+            String clientName = request.queryParams("clientName");
+            int clientIdNo = Integer.parseInt(request.queryParams("clientIdNo"));
+            int clientPhone = Integer.parseInt(request.queryParams("clientPhone"));
+            String clientLocation = request.queryParams("clientLocation");
+            int clientPassword = Integer.parseInt(request.queryParams("clientPassword"));
+            int clientPasswordConf = Integer.parseInt(request.queryParams("password_confirmation"));
+            if(clientPassword != clientPasswordConf){
+                response.redirect("/cleaner/register");
+            }else{
+                Client newClient = new Client(clientName, clientPassword, clientIdNo, clientPhone, clientLocation);
+                clientDao.addClient(newClient);
+
+                //System.out.println(newClient.getClientName()+newClient.getClientPassword()+newClient.getClientIdNo()+newClient.getClientPhone()+newClient.getClientLocation());
+                response.redirect("/client/login");
+            }
+            return null;
         }, new HandlebarsTemplateEngine());
 
 
