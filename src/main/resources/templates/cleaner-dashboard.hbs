@@ -18,14 +18,14 @@
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-xl-9 ">
                 <div class="card panel" style="border-radius: 15px;">
-                    <form method="post" action="/cleaner/profile/update">
+                    <form method="post" action="/cleaner/profile/update/{{cleaner.id}}">
                         <div class="card-body">
                             <div class="row align-items-center pt-4 pb-3">
                                 <div class="col-md-3">
                                     <h6 class="mb-0">Cleaner name</h6>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="text" name="cleanerName" id="cleanerName" class="form-control form-control-lg" />
+                                    <input type="text" name="cleanerName" id="cleanerName" class="form-control form-control-lg"  value="{{cleaner.cleanerName}}"/>
                                 </div>
                             </div>
                             <div class="row align-items-center py-3">
@@ -33,7 +33,7 @@
                                     <h6 class="mb-0"> Phone Number</h6>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="url" name="exerciseUrl" id="exerciseUrl" class="form-control form-control-lg" />
+                                    <input type="number" name="cleanerPhone" id="cleanerPhone" class="form-control form-control-lg" value="{{cleaner.cleanerPhone}}"/>
                                 </div>
                             </div>
                             <div class="row align-items-center">
@@ -41,9 +41,7 @@
                                     <h6 class="mb-0">Cleaner Bio</h6>
                                 </div>
                                 <div class="col-md-9">
-                                    <textarea class="form-control" rows="7"
-                                              name="exerciseDescription" id="exerciseDescription"
-                                              placeholder="Update your Bio"></textarea>
+                                    <textarea class="form-control" rows="7" name="cleanerBio" id="cleanerBio" placeholder="{{cleaner.cleanerBio}}"></textarea>
                                 </div>
                             </div>
                             <div class="px-5 py-4">

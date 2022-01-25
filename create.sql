@@ -21,4 +21,13 @@ CREATE TABLE cleaners(
     cleanerRating INT
 );
 
+CREATE TABLE reviews(
+id serial PRIMARY KEY,
+reviewer VARCHAR,
+reviewerLocation VARCHAR,
+rating int,
+reviewMessage VARCHAR,
+cleanerId int,
+createdAt VARCHAR);
+
 CREATE DATABASE digiclean_test WITH TEMPLATE digiclean;

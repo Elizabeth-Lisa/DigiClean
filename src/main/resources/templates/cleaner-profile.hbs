@@ -1,0 +1,60 @@
+{{#partial "content"}}
+
+
+    <div class="card mb-3" style="width: 100%">
+        <div class="row g-0">
+            <div class="col-md">
+                <img src="https://i.pravatar.cc/100" class="img-fluid" />
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h1 class="card-title burj">{{ cleaner.cleanerName }}</h1>
+
+                    <p class="card-text">
+                    <p class="text-muted"
+                    ><i class="fa fa-phone" aria-hidden="true"></i>
+                        {{ cleaner.cleanerPhone }}</p
+                    >
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="review-content d-flex flex-col">
+        <div class="Description col-md-3">
+            <p class="comp-description"><h1>About {{cleaner.cleanerName}}</h1></p>
+            <p>{{ cleaner.cleanerBio }}
+            </p>
+            <a href="/review/{{ cleaner.id }}/new" class="button mb-4">Add Review</a>
+        </div>
+
+        <div class="card-group flex-row">
+            {{#if reviews}}
+                <div class="card-group">
+                    {{#each reviews}}
+                        <div class="card" style="width: 18rem; padding-left: 2px;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{reviewer}}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Rating: {{rating}}</h6>
+                                <p class="card-text">{{reviewMessage}}</p>
+                                <a href="#" class="card-link">Posted in {{reviewerLocation}}</a>
+                                <a href="#" class="card-link">at {{createdAt}}</a>
+                            </div>
+                        </div>
+                        </hr>
+
+                    {{/each}}
+                </div>
+            {{else}}
+                <p class="text-centers">No reviews available</p>
+                <a href="/review/{{ cleaner.id}}/new" class="button">Write a review</a>
+            {{/if}}
+        </div>
+
+    </div>
+
+
+{{/partial}}
+
+{{> layout.hbs}}

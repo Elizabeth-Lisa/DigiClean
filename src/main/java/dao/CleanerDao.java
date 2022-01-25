@@ -17,6 +17,7 @@ public interface CleanerDao {
     Cleaner findCleanerById(int id);
 
     //Update a cleaner
+    void updateCleaner(Cleaner cleaner, int id);
 
 
     //Delete a cleaner

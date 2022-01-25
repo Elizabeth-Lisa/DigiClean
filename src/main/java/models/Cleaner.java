@@ -10,11 +10,13 @@ public class Cleaner {
     private boolean status;
     private int cleanerRating;
 
+
     public Cleaner(String cleanerName, int cleanerPassword, int cleanerIdNo, int cleanerPhone) {
         this.cleanerName = cleanerName;
         this.cleanerPassword = cleanerPassword;
         this.cleanerIdNo = cleanerIdNo;
         this.cleanerPhone = cleanerPhone;
+        this.status = false;
     }
 
     public int getId() {

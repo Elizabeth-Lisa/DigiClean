@@ -38,7 +38,7 @@ public class Sql2oCleanerDao implements CleanerDao{
     public void addCleaner(Cleaner cleaner) {
         getDrivers();
 
-        String sql = "INSERT INTO cleaners (cleanerName, cleanerPassword, cleanerIdNo, cleanerPhone) VALUES (:cleanerName, :cleanerPassword, :cleanerIdNo, :cleanerPhone)";
+        String sql = "INSERT INTO cleaners (cleanerName, cleanerPassword, cleanerIdNo, cleanerPhone, status) VALUES (:cleanerName, :cleanerPassword, :cleanerIdNo, :cleanerPhone, :status)";
         try(Connection conn = sql2o.open()){
             int id = (int) conn.createQuery(sql,true)
                     .bind(cleaner)
@@ -52,16 +52,30 @@ public class Sql2oCleanerDao implements CleanerDao{
     }
 
     @Override
+    public void updateCleaner(Cleaner cleaner, int id) {
+        getDrivers();
+
+        String sql = "UPDATE cleaners SET (cleanerName, cleanerPassword, cleanerIdNo, cleanerPhone, status, cleanerBio) = (:cleanerName, :cleanerPassword, :cleanerIdNo, :cleanerPhone, :status, :cleanerBio) WHERE id = :id";
+        try(Connection conn = sql2o.open()){
+            conn.createQuery(sql)
+                    .bind(cleaner)
+                    .executeUpdate();
+        }catch (Sql2oException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
     public Cleaner findCleanerById(int id) {
         getDrivers();
         String sql = "SELECT * FROM cleaners where id = :id";
 
         try(Connection conn = sql2o.open()){
-            conn.createQuery(sql)
+           return conn.createQuery(sql)
                     .addParameter("id",id)
                     .executeAndFetchFirst(Cleaner.class);
         }
-        return null;
     }
 
     @Override

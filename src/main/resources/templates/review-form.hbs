@@ -1,0 +1,37 @@
+{{#partial "title"}}PREVIEWS{{/partial}}
+
+{{#partial "content"}}
+    <h1 class="text-center">Tell us about your experience with {{cleaner.cleanerName}}</h1>
+    <div class="container">
+        <form action="/review/process/{{cleaner.id}}" method="post">
+            <div class="mb-3">
+                <label for = "reviewer" class="form-label text-color">Tell us you name</label>
+                <input type="text" class = "form-control" id="reviewer" name="reviewer">
+            </div>
+            <input class="d-none" type="number" placeholder="{{cleaner.id}}" id="cleanerId" name="cleanerId" value="{{cleaner.id}}">
+
+
+            <div class="mb-3">
+                <label for = "reviewerLocation" class = "form-label text-color">Your Location</label>
+                <input type="text" class = "form-control" id="reviewerLocation" name="reviewerLocation">
+            </div>
+
+            <div class="mb-3">
+                <label for="rating" class="form-label text-color">Rating(1-5)</label>
+                <input type="number" class="form-control" id="rating" name="rating">
+            </div>
+
+            <div class ="mb-3">
+                <label for="reviewerMessage" class="form-label text-color">Tell us about your experience</label>
+                <textarea class="form-control" name="reviewerMessage" id="reviewerMessage" rows="3"></textarea>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class = "button">Post Review</button>
+            </div>
+        </form>
+    </div>
+    </div>
+{{/partial}}
+
+{{> layout.hbs}}
