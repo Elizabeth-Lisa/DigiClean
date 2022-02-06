@@ -29,6 +29,12 @@ else if ($text == "1*1*1") {
 $response = "CON Enter your full name  \n";
 $response .= "Enter 0 to cancel";
 }
+else if(strpos($text,'lisa')){
+$response = "END registration Successful. \n";
+}
+else if(strpos($text,'ID')){
+$response = "CON Enter your password";
+}
 else if ($text == "1*1*1*0") {
 $response = "END Your registration has been canceled";
 }
