@@ -46,6 +46,11 @@
                             </div>
                             <div class="px-5 py-4">
                                 <input type="submit" value="Update Profile" class="btn btn-info btn-block redd mt-5">
+                                {{#if success}}
+                                    <script>
+                                        alert("{{success}}");
+                                    </script>
+                                {{/if}}
                             </div>
                         </div>
                     </form>

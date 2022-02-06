@@ -67,7 +67,7 @@ public class Cleaner {
         this.cleanerPhone = cleanerPhone;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 

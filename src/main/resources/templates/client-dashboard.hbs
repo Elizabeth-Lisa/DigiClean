@@ -17,7 +17,18 @@
                             <p>
                                 {{cleanerBio}}
                             </p>
-            <a href="/cleaner/hire/{{id}}" class="btn btn-danger align-center">Hire Me</a>
+                            {{#if status}}
+                                <h3>This Cleaner is currently working</h3>
+                            {{else}}
+                                <a href="/cleaner/hire/{{id}}" class="btn btn-danger align-center">Hire Me</a>
+                            {{/if}}
+
+                            {{#if message}}
+                                <script>
+                                    alert({{message}});
+                                </script>
+                            {{/if}}
+
 
 
                         </div>

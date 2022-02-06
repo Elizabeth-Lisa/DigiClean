@@ -1,6 +1,5 @@
 {{#partial "content"}}
 
-
     <div class="card mb-3" style="width: 100%">
         <div class="row g-0">
             <div class="col-md">
@@ -16,6 +15,20 @@
                         {{ cleaner.cleanerPhone }}</p
                     >
                     </p>
+
+                    <h5>Rating</h5>
+                 <div class="d-flex flex-row">
+                    {{#each reviews}}
+                        <p id="star" class="d-flex flex-row"><i class="fa fa-star" ></i></p>
+
+                        <script>
+                                    var rat = {{ rating }};
+                                    for(let i = 1; i <= rat; i++){
+                                    document.getElementById("star").innerHTML += "<i class="fa fa-star" ></i>";
+                                    }
+                                </script>
+                    {{/each}}
+                 </div>
                 </div>
             </div>
         </div>
@@ -26,7 +39,8 @@
             <p class="comp-description"><h1>About {{cleaner.cleanerName}}</h1></p>
             <p>{{ cleaner.cleanerBio }}
             </p>
-            <a href="/review/{{ cleaner.id }}/new" class="button mb-4">Add Review</a>
+                <a href="/review/{{ cleaner.id }}/new" class="button mb-4">Add Review</a>
+
         </div>
 
         <div class="card-group flex-row">
@@ -37,6 +51,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{reviewer}}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">Rating: {{rating}}</h6>
+
                                 <p class="card-text">{{reviewMessage}}</p>
                                 <a href="#" class="card-link">Posted in {{reviewerLocation}}</a>
                                 <a href="#" class="card-link">at {{createdAt}}</a>
@@ -47,8 +62,6 @@
                     {{/each}}
                 </div>
             {{else}}
-                <p class="text-centers">No reviews available</p>
-                <a href="/review/{{ cleaner.id}}/new" class="button">Write a review</a>
             {{/if}}
         </div>
 

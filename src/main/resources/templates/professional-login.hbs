@@ -30,6 +30,11 @@
                             <div class="form-group">
                                 <label for="remember-me" class=""><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
                                 <input type="submit" value="Log in" class="btn btn-info btn-block redd mt-5">
+                                {{#if error}}
+                                    <script>
+                                        alert("{{error}}");
+                                    </script>
+                                {{/if}}
                             </div>
 
                         </form>

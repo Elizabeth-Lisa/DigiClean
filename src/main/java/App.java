@@ -61,20 +61,25 @@ public class App {
             int cleanerPassword = Integer.parseInt(request.queryParams("cleanerPassword"));
             Cleaner exist = cleanerDao.findCleanerByIdAndPassword(cleanerIdNo,cleanerPassword);
             if (exist == null){
-                response.type("text/html");
-                response.body("User Does Not Exist");
-                response.redirect("/professional/login");
+                //response.type("text/html");
+                //response.body("User Does Not Exist");
+                //response.redirect("/professional/login");
+                String error = "User Does Not Exist";
+                model.put("error",error);
             }else{
                 if (exist.getCleanerIdNo() == cleanerIdNo && exist.getCleanerPassword() == cleanerPassword){
                     int id = exist.getId();
                     //cid = exist.getId();
                     response.redirect("/cleaner/dashboard/"+id+"");
+                    halt();
                 }else{
                     response.body("Wrong Id or Password");
-                    response.redirect("/professional/login");
+                    String error = "Wrong Id or Password";
+                    //response.redirect("/professional/login");
+                    model.put("error",error);
                 }
             }
-            return null;
+            return new ModelAndView(model,"professional-login.hbs");
         }, new HandlebarsTemplateEngine());
 
 
@@ -92,6 +97,11 @@ public class App {
         post("/cleaner/profile/update/:id",(request,response)->{
             Map<String,Object>model = new HashMap<>();
             int cleanerId = Integer.parseInt(request.params("id"));
+            int id = Integer.parseInt(request.params("id"));
+            String success = "Profile updated successfully";
+            Cleaner thisCleaner = cleanerDao.findCleanerById(id);
+            //System.out.println(id);
+            model.put("cleaner",thisCleaner);
             //System.out.println(cleanerId);
             String cleanerName = request.queryParams("cleanerName");
             String cleanerBio = request.queryParams("cleanerBio");
@@ -110,8 +120,9 @@ public class App {
 
             cleanerDao.updateCleaner(cleanerToUpdate, cleanerId);
             //System.out.println(cleanerId);
-            response.redirect("/cleaner/dashboard/"+cleanerId+"");
-            return null;
+            //response.redirect("/cleaner/dashboard/"+cleanerId+"");
+            model.put("success",success);
+            return new ModelAndView(model,"cleaner-dashboard.hbs");
         }, new HandlebarsTemplateEngine());
 
 
@@ -151,12 +162,15 @@ public class App {
         //process client login form
         post("/client/login", (request,response)->{
             Map<String,Object>model = new HashMap<>();
+            String error = "Incorrect Password or Id";
+
             int clientIdNo = Integer.parseInt(request.queryParams("clientIdNo"));
             int clientPassword = Integer.parseInt(request.queryParams("clientPassword"));
             Client exist = clientDao.findClientByIdAndPassword(clientIdNo,clientPassword);
             if (exist.getClientIdNo() == clientIdNo && exist.getClientPassword() == clientPassword){
                 response.redirect("/client/dashboard");
             }else{
+                model.put("error",error);
                 response.redirect("/client/login");
             }
             return null;
@@ -190,25 +204,28 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
 
-        //trainer dashboard
+        //client dashboard
         get("/client/dashboard",(request,response)->{
             Map<String,Object>model = new HashMap<>();
             List<Cleaner> allCleaners = cleanerDao.getAllCleaners();
             model.put("cleaners",allCleaners);
+            System.out.println(allCleaners.get(1).getStatus());
             return new ModelAndView(model,"client-dashboard.hbs");
         }, new HandlebarsTemplateEngine());
 
         //process hire
         get("/cleaner/hire/:id",(request,response)->{
             Map<String, Object> model = new HashMap<>();
+            boolean msg = true;
+            List<Cleaner> allCleaners = cleanerDao.getAllCleaners();
+            model.put("cleaners",allCleaners);
+            model.put("message",msg);
             int cleanerId = Integer.parseInt(request.params("id"));
             Cleaner foundCleaner = cleanerDao.findCleanerById(cleanerId);
             foundCleaner.setStatus(true);
             cleanerDao.updateCleaner(foundCleaner, foundCleaner.getId());
-            System.out.println(foundCleaner.isStatus());
-            return new ModelAndView(model,"success.hbs");
+            return new ModelAndView(model,"client-dashboard.hbs");
         }, new HandlebarsTemplateEngine());
-
 
         // Custom error page
         internalServerError((req, res) -> {
@@ -256,8 +273,27 @@ public class App {
             return new ModelAndView(model, "success.hbs");
         }, new HandlebarsTemplateEngine() );
 
+        //get cleaners and reviews
+        get("/reviews",(request,response)->{
+            Map<String,Object>model = new HashMap<>();
+            List<Cleaner> allCleaners = cleanerDao.getAllCleaners();
+            model.put("cleaners",allCleaners);
+            return new ModelAndView(model,"client-dashboard.hbs");
+        }, new HandlebarsTemplateEngine());
 
+        //get services
+        get("/services",(request,response)->{
+            Map<String,Object>model = new HashMap<>();
+//            List<Cleaner> allCleaners = cleanerDao.getAllCleaners();
+//            model.put("cleaners",allCleaners);
+            return new ModelAndView(model,"services.hbs");
+        }, new HandlebarsTemplateEngine());
 
+        //get customer reviews
+        get("/customer/reviews",(request,response)->{
+            Map<String,Object>model = new HashMap<>();
+            return new ModelAndView(model,"customer-reviews.hbs");
+        }, new HandlebarsTemplateEngine());
 
     }
 }
